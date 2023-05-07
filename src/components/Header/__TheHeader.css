@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap");
+.heading__container {
+  margin-top: 300px;
+  display: flex;
+  flex-direction: row;
+  flex-flow: column;
+  width: 100%;
+  height: 40%;
+  text-align: center;
+  align-content: center;
+}
+
+.btns__container {
+  padding-bottom: 30px;
+  align-items: center;
+}
+
+.heading {
+  margin-left: 40px;
+  font-size: 60px;
+  text-transform: uppercase;
+  align-items: center;
+  color: white;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+button {
+  padding: 0.8em 2em 0.8em 2.5em;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 15px;
+  color: #f6fff6;
+  letter-spacing: 0.3em;
+  text-shadow: -2px 2px 5px #33fd30;
+  background-color: transparent;
+  border: 2px solid #bbfeb1;
+  box-shadow: 0 0 0px 1px #42f112, 0 0 10px 2px #33fd30, inset 0 0 0px 1px #42f112, inset 0 0 10px 2px #33fd30;
+  transition: 100ms;
+  margin-left: 20px;
+}
+
+button:hover {
+  box-shadow: 0 0 0px 1px #42f112, 0 0 10px 2px #33fd30, inset 0 0 0px 1px #42f112, inset 0 0 30px 2px #33fd30;
+  text-shadow: 0 0 10px #33fd30;
+  transform: translateY(-5px);
+}
+
+button:active {
+  box-shadow: 0 0 0px 1px #42f112, 0 0 25px 2px #33fd30, inset 0 0 0px 1px #42f112, inset 0 0 30px 2px #33fd30;
+  transform: translateY(1px);
+}
