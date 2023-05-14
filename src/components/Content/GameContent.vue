@@ -23,9 +23,9 @@
             seconds:0,
             message: '',
             word: '',
-            words:['hello','appointment','crossover','hat','river','statue','generate','stubborn','cocktail','sugar','nonsense','jealous',
-             'impatient','joke','appropriate','mountaintop','javascript','algorithm',"own","other","old","right","big","high","different","small",
-             "large","next","early","young","important","few","public","bad","same","able","disability","arrangement","impostor","credibility"],
+            words:[ 'calendar','appointment','crossover','comparison','tomorrow','comfortable','generate','stubborn','cocktail','accidentally','nonsense','jealous',
+             'impatient','maelstrom','appropriate','mountaintop','grateful','algorithm',"maintain","other","phenomenon","excellent","aberration","complement","different","exaggerate",
+             "recommend","development","direction","immediate","important","subjugate","public","accomplish","knowledge","conflagration","disability","arrangement","impostor","credibility"],
         }
     },
     methods:{
