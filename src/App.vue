@@ -1,13 +1,16 @@
 <template>
     <TheHeader></TheHeader>
+    <GameContent></GameContent>
 </template>
 
 <script>
 import TheHeader from './components/Header/TheHeader.vue';
+import GameContent from './components/Content/GameContent.vue'
 export default {
   name: 'App',
   components:{
     TheHeader,
+    GameContent,
   }
 }
 </script>
