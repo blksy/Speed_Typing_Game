@@ -3,9 +3,9 @@
         <h3>Type the given word within <span class="seconds">{{seconds}}</span> seconds</h3>
         <h1 class="guess">{{ word }}</h1>
             <form ref="form" >
-                <input type="text" placeholder="Start typing"/>
+                <input type="text" placeholder="Start typing" v-model="inputValue" name="userInput"/>
             </form>
-        <h4 class="message">{{message}}</h4>
+        <h4 class="message">{{message}}message</h4>
       <div class="score">
         <h4>Time Left: {{ time }}</h4>
         <h4>Score: {{score}}</h4>
@@ -21,6 +21,7 @@
             time: 0,
             score: 0,
             seconds:0,
+            inputValue: '',
             message: '',
             word: '',
             words:[ 'calendar','appointment','crossover','comparison','tomorrow','comfortable','generate','stubborn','cocktail','accidentally','nonsense','jealous',
@@ -29,11 +30,24 @@
         }
     },
     methods:{
+        getUserInput(){
+          const userWord = this.$refs.form.userInput.value;
+          if(userWord === this.word){
+            this.message = 'Correct!'
+            this.word = this.randomWord()
+            this.input = '';
+            this.score ++;
+          }else{
+            this.message = 'Wrong Answer!'
+          }
+        },
+
         randomWord(){
             let randomWord = Math.floor(Math.random() * this.words.length)
             return this.words[randomWord];
         }
     },
+
     mounted(){
         this.word = this.randomWord();
     }
