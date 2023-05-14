@@ -14,7 +14,7 @@
     padding-bottom: 30px;
     align-items: center;
 }
-.heading{
+h1{
    margin-left: 40px;
    font-size: 60px;
    text-transform: uppercase;
@@ -22,7 +22,17 @@
    color:white;
    font-size: 30px;
    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-   
+}
+p{
+  font-size: 50px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+h1{
+  font-size: 60px;
+  margin-bottom:0;
 }
 button {
     padding: 0.8em 2em 0.8em 2.5em;
