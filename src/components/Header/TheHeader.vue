@@ -1,6 +1,7 @@
 <template>
   <div class="heading__container">
     <h1 class="heading">Speed Typing Game</h1>
+    <p class="heading">Select Difficulty</p>
      <div class="btns__contain">
        <button class="button">Easy</button>
        <button class="button">Medium</button>
@@ -10,6 +11,9 @@
 </template>
 
 <script>
+export default{
+   
+}
 </script>
 
 <style lang="scss" scoped>
