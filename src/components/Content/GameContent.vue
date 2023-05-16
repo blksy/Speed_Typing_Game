@@ -6,11 +6,11 @@
                 <input type="text" placeholder="Start typing" v-model="inputValue" name="userInput"/>
             </form>
         <h4 class="message">{{message}}</h4>
-      <div class="score">
-        <h4>Time Left: {{ time }}</h4>
-        <h4>Score: {{score}}</h4>
-      </div>
-      <button class="button">New Game</button>
+        <div class="score">
+          <h4>Time Left: {{ time }}</h4>
+          <h4>Score: {{score}}</h4>
+        </div>
+      <button class="button" @click="reset">New Game</button>
     </div>
 </template>
 
@@ -18,9 +18,10 @@
    export default{
     data(){
         return{
-            time: 0,
+            time: 8,
             score: 0,
             seconds:0,
+            isGameOn: true,
             inputValue: '',
             message: '',
             word: '',
@@ -46,8 +47,22 @@
             let randomWord = Math.floor(Math.random() * this.words.length)
             return this.words[randomWord];
         },
+        timeCountDown(){
+            setInterval(() =>{
+            let remainingTime = this.time
+            if(remainingTime > 0){
+                this.time--
+            }else{
+                this.isGameOn = false
+                this.message = 'Gameover'
+                this.inputValue = ''
+            }}, 1200);
+        }, 
         timeLeft(){
             this.time = this.seconds;
+        },
+        reset(){
+        window.location.reload();
         },
     },
 
