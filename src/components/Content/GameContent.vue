@@ -2,10 +2,10 @@
     <div class="content">
         <h3>Type the given word within <span class="seconds">{{seconds}}</span> seconds</h3>
         <h1 class="guess">{{ word }}</h1>
-            <form ref="form" >
+            <form ref="form" @submit.prevent="getUserInput()">
                 <input type="text" placeholder="Start typing" v-model="inputValue" name="userInput"/>
             </form>
-        <h4 class="message">{{message}}message</h4>
+        <h4 class="message">{{message}}</h4>
       <div class="score">
         <h4>Time Left: {{ time }}</h4>
         <h4>Score: {{score}}</h4>
@@ -35,7 +35,7 @@
           if(userWord === this.word){
             this.message = 'Correct!'
             this.word = this.randomWord()
-            this.input = '';
+            this.inputValue = '';
             this.score ++;
           }else{
             this.message = 'Wrong Answer!'
@@ -45,7 +45,10 @@
         randomWord(){
             let randomWord = Math.floor(Math.random() * this.words.length)
             return this.words[randomWord];
-        }
+        },
+        timeLeft(){
+            this.time = this.seconds;
+        },
     },
 
     mounted(){
