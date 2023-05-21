@@ -1,4 +1,9 @@
 <template>
+    <div class="btns__contain">
+       <button class="button__dif">Easy</button>
+       <button class="button__dif">Medium</button>
+       <button class="button__dif">Hard</button>
+    </div>
     <div class="content">
         <h3>Type the given word within <span class="seconds">{{seconds}}</span> seconds</h3>
         <h1 class="guess">{{ word }}</h1>
