@@ -1,4 +1,9 @@
 <template>
+    <div class="btns__contain">
+       <button class="button__dif" @click="easyDiff">Easy</button>
+       <button class="button__dif" @click="mediumDiff">Medium</button>
+       <button class="button__dif" @click="hardDiff">Hard</button>
+    </div>
     <div class="content">
         <h3>Type the given word within <span class="seconds">{{seconds}}</span> seconds</h3>
         <h1 class="guess">{{ word }}</h1>
@@ -6,11 +11,11 @@
                 <input type="text" placeholder="Start typing" v-model="inputValue" name="userInput"/>
             </form>
         <h4 class="message">{{message}}</h4>
-      <div class="score">
-        <h4>Time Left: {{ time }}</h4>
-        <h4>Score: {{score}}</h4>
-      </div>
-      <button class="button">New Game</button>
+        <div class="score">
+          <h4>Time Left: {{ time }}</h4>
+          <h4>Score: {{score}}</h4>
+        </div>
+      <button class="button" @click="reset">New Game</button>
     </div>
 </template>
 
@@ -21,6 +26,10 @@
             time: 0,
             score: 0,
             seconds:0,
+            easy: 9,
+            medium: 6,
+            hard: 3,
+            isGameOn: true,
             inputValue: '',
             message: '',
             word: '',
@@ -37,6 +46,7 @@
             this.word = this.randomWord()
             this.inputValue = '';
             this.score ++;
+            this.timeReset();
           }else{
             this.message = 'Wrong Answer!'
           }
@@ -46,8 +56,60 @@
             let randomWord = Math.floor(Math.random() * this.words.length)
             return this.words[randomWord];
         },
+        
+        easyDiff(){
+          this.seconds = this.easy;
+          this.timeLeft();
+          this.timeCountDown();
+          this.level = 'easy';
+          this.$refs.form.userInput.focus();
+        },
+
+        mediumDiff(){
+          this.seconds = this.medium;
+          this.timeLeft();
+          this.timeCountDown();
+          this.level = 'medium';
+          this.$refs.form.userInput.focus();
+        },
+
+        hardDiff(){
+          this.seconds = this.hard;
+          this.timeLeft();
+          this.timeCountDown();
+          this.level = 'hard';
+          this.$refs.form.userInput.focus();
+        },
+
+        timeCountDown(){
+            setInterval(() =>{
+            let remainingTime = this.time
+            if(remainingTime > 0){
+                this.time--
+            }else{
+                this.isGameOn = false
+                this.message = 'Game Over'
+                this.inputValue = ''
+                this.reset()
+            }}, 1200);
+        }, 
+
         timeLeft(){
             this.time = this.seconds;
+        },
+
+        timeReset(){
+         if(this.level === 'easy'){
+            this.time = this.easy
+         }else if(this.level === 'medium'){
+            this.time = this.medium
+         }else if(this.level === 'hard'){
+            this.time = this.hard
+         }
+        },
+
+        reset(){
+        window.location.reload();
         },
     },
 
