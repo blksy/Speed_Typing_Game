@@ -46,6 +46,7 @@
             this.word = this.randomWord()
             this.inputValue = '';
             this.score ++;
+            this.timeReset();
           }else{
             this.message = 'Wrong Answer!'
           }
@@ -57,14 +58,24 @@
         },
         
         easyDiff(){
-
+          this.seconds = this.easy;
+          this.timeLeft();
+          this.timeCountDown();
+          this.level = 'easy';
         },
 
         mediumDiff(){
-
+          this.seconds = this.medium;
+          this.timeLeft();
+          this.timeCountDown();
+          this.level = 'medium';
         },
-        hardDiff(){
 
+        hardDiff(){
+          this.seconds = this.hard;
+          this.timeLeft();
+          this.timeCountDown();
+          this.level = 'hard';
         },
 
         timeCountDown(){
@@ -74,13 +85,23 @@
                 this.time--
             }else{
                 this.isGameOn = false
-                this.message = 'Gameover'
+                this.message = 'Game Over'
                 this.inputValue = ''
             }}, 1200);
         }, 
 
         timeLeft(){
             this.time = this.seconds;
+        },
+
+        timeReset(){
+         if(this.level === 'easy'){
+            this.time = this.easy
+         }else if(this.level === 'medium'){
+            this.time = this.medium
+         }else if(this.level === 'hard'){
+            this.time = this.hard
+         }
         },
 
         reset(){
