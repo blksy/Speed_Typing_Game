@@ -23,7 +23,7 @@
    export default{
     data(){
         return{
-            time: 8,
+            time: 0,
             score: 0,
             seconds:0,
             easy: 9,
@@ -62,6 +62,7 @@
           this.timeLeft();
           this.timeCountDown();
           this.level = 'easy';
+          this.$refs.form.userInput.focus();
         },
 
         mediumDiff(){
@@ -69,6 +70,7 @@
           this.timeLeft();
           this.timeCountDown();
           this.level = 'medium';
+          this.$refs.form.userInput.focus();
         },
 
         hardDiff(){
@@ -76,6 +78,7 @@
           this.timeLeft();
           this.timeCountDown();
           this.level = 'hard';
+          this.$refs.form.userInput.focus();
         },
 
         timeCountDown(){
@@ -87,6 +90,7 @@
                 this.isGameOn = false
                 this.message = 'Game Over'
                 this.inputValue = ''
+                this.reset()
             }}, 1200);
         }, 
 
