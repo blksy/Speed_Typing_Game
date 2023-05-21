@@ -1,8 +1,8 @@
 <template>
     <div class="btns__contain">
-       <button class="button__dif">Easy</button>
-       <button class="button__dif">Medium</button>
-       <button class="button__dif">Hard</button>
+       <button class="button__dif" @click="easyDiff">Easy</button>
+       <button class="button__dif" @click="mediumDiff">Medium</button>
+       <button class="button__dif" @click="hardDiff">Hard</button>
     </div>
     <div class="content">
         <h3>Type the given word within <span class="seconds">{{seconds}}</span> seconds</h3>
@@ -26,6 +26,9 @@
             time: 8,
             score: 0,
             seconds:0,
+            easy: 9,
+            medium: 6,
+            hard: 3,
             isGameOn: true,
             inputValue: '',
             message: '',
@@ -52,6 +55,18 @@
             let randomWord = Math.floor(Math.random() * this.words.length)
             return this.words[randomWord];
         },
+        
+        easyDiff(){
+
+        },
+
+        mediumDiff(){
+
+        },
+        hardDiff(){
+
+        },
+
         timeCountDown(){
             setInterval(() =>{
             let remainingTime = this.time
@@ -63,9 +78,11 @@
                 this.inputValue = ''
             }}, 1200);
         }, 
+
         timeLeft(){
             this.time = this.seconds;
         },
+
         reset(){
         window.location.reload();
         },
