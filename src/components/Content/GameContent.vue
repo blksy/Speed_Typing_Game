@@ -1,8 +1,8 @@
 <template>
     <div class="btns__contain">
-       <button class="button__dif" @click="easyDiff">Easy</button>
-       <button class="button__dif" @click="mediumDiff">Medium</button>
-       <button class="button__dif" @click="hardDiff">Hard</button>
+       <button class="button__dif" @click="chooseDifficulty('easy', 9)">Easy</button>
+       <button class="button__dif" @click="chooseDifficulty('medium', 6)">Medium</button>
+       <button class="button__dif" @click="chooseDifficulty('hard', 3)">Hard</button>
     </div>
     <div class="content">
         <h3>Type the given word within <span class="seconds">{{seconds}}</span> seconds</h3>
@@ -26,13 +26,14 @@
             time: 0,
             score: 0,
             seconds:0,
-            easy: 9,
-            medium: 6,
-            hard: 3,
             isGameOn: true,
             inputValue: '',
             message: '',
             word: '',
+            difficulty:{
+              diff:['easy', 'medium', 'hard'],
+              count:[9, 6, 3]
+            },
             words:[ 'calendar','appointment','crossover','comparison','tomorrow','comfortable','generate','stubborn','cocktail','accidentally','nonsense','jealous',
              'impatient','maelstrom','appropriate','mountaintop','grateful','algorithm',"maintain","other","phenomenon","excellent","aberration","complement","different","exaggerate",
              "recommend","development","direction","immediate","important","subjugate","public","accomplish","knowledge","conflagration","disability","arrangement","impostor","credibility"],
@@ -57,27 +58,11 @@
             return this.words[randomWord];
         },
         
-        easyDiff(){
-          this.seconds = this.easy;
+        chooseDifficulty(name, time){
+          this.seconds = this.difficulty.count[time];
           this.timeLeft();
           this.timeCountDown();
-          this.level = 'easy';
-          this.$refs.form.userInput.focus();
-        },
-
-        mediumDiff(){
-          this.seconds = this.medium;
-          this.timeLeft();
-          this.timeCountDown();
-          this.level = 'medium';
-          this.$refs.form.userInput.focus();
-        },
-
-        hardDiff(){
-          this.seconds = this.hard;
-          this.timeLeft();
-          this.timeCountDown();
-          this.level = 'hard';
+          this.level = this.difficulty.diff[name];
           this.$refs.form.userInput.focus();
         },
 
@@ -90,7 +75,6 @@
                 this.isGameOn = false
                 this.message = 'Game Over'
                 this.inputValue = ''
-                this.reset()
             }}, 1200);
         }, 
 
@@ -100,16 +84,20 @@
 
         timeReset(){
          if(this.level === 'easy'){
-            this.time = this.easy
+            this.time = 9
          }else if(this.level === 'medium'){
-            this.time = this.medium
+            this.time = 6
          }else if(this.level === 'hard'){
-            this.time = this.hard
+            this.time = 3
          }
         },
 
         reset(){
-        window.location.reload();
+        this.isGameOn = true;
+        this.time = 0;
+        this.score = 0;
+        this.seconds = 0;
+        this.message = '';
         },
     },
 
