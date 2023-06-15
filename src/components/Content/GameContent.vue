@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
    export default{
     data(){
         return{
@@ -34,17 +36,35 @@
               diff:['easy', 'medium', 'hard'],
               count:[9, 6, 3]
             },
-            words:[ 'calendar','appointment','crossover','comparison','tomorrow','comfortable','generate','stubborn','cocktail','accidentally','nonsense','jealous',
-             'impatient','maelstrom','appropriate','mountaintop','grateful','algorithm',"maintain","other","phenomenon","excellent","aberration","complement","different","exaggerate",
-             "recommend","development","direction","immediate","important","subjugate","public","accomplish","knowledge","conflagration","disability","arrangement","impostor","credibility"],
+            // words:[ 'calendar','appointment','crossover','comparison','tomorrow','comfortable','generate','stubborn','cocktail','accidentally','nonsense','jealous',
+            //  'impatient','maelstrom','appropriate','mountaintop','grateful','algorithm',"maintain","other","phenomenon","excellent","aberration","complement","different","exaggerate",
+            //  "recommend","development","direction","immediate","important","subjugate","public","accomplish","knowledge","conflagration","disability","arrangement","impostor","credibility"],
         }
     },
     methods:{
-        getUserInput(){
+     async getWord(){     
+         const options = {
+         method: 'GET',
+         url: 'https://random-words5.p.rapidapi.com/getRandom',
+         headers: {
+          'X-RapidAPI-Key': 'f9895ba9a6msh16dfa6ff7c91666p11d171jsn8fe801ed49b1',
+          'X-RapidAPI-Host': 'random-words5.p.rapidapi.com'
+        }
+      }
+     /* eslint-disable no-mixed-spaces-and-tabs */
+      try { 
+	    const response = await axios.request(options);
+	    console.log(response.data);
+      } catch (error) {
+	    console.error(error);
+      }
+    }, 
+        
+    getUserInput(){
           const userWord = this.$refs.form.userInput.value;
           if(userWord === this.word){
             this.message = 'Correct!'
-            this.word = this.randomWord()
+            this.word = this.getWord()
             this.inputValue = '';
             this.score ++;
             this.timeReset();
@@ -53,10 +73,10 @@
           }
         },
 
-        randomWord(){
-            let randomWord = Math.floor(Math.random() * this.words.length)
-            return this.words[randomWord];
-        },
+        // randomWord(){
+        //     let randomWord = Math.floor(Math.random() * this.words.length)
+        //     return this.words[randomWord];
+        // },
         
         chooseDifficulty(name, time){
           this.seconds = this.difficulty.count[time];
@@ -102,9 +122,13 @@
     },
 
     mounted(){
-        this.word = this.randomWord();
+        this.word = this.getWord();
     }
    }
+   
+   
+
+
 </script>
 
 <style lang="scss" scoped>
