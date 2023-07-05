@@ -16,7 +16,7 @@
           <h4>Score: {{score}}</h4>
         </div>
       <button class="button" @click="reset">New Game</button>
-    </div>
+    </div>  
 </template>
 
 <script>
@@ -41,25 +41,7 @@ import axios from 'axios';
             //  "recommend","development","direction","immediate","important","subjugate","public","accomplish","knowledge","conflagration","disability","arrangement","impostor","credibility"],
         }
     },
-    methods:{
-     async getWord(){     
-         const options = {
-         method: 'GET',
-         url: 'https://random-words5.p.rapidapi.com/getRandom',
-         headers: {
-          'X-RapidAPI-Key': 'f9895ba9a6msh16dfa6ff7c91666p11d171jsn8fe801ed49b1',
-          'X-RapidAPI-Host': 'random-words5.p.rapidapi.com'
-        }
-      }
-     /* eslint-disable no-mixed-spaces-and-tabs */
-      try { 
-	    const response = await axios.request(options);
-	    console.log(response.data);
-      } catch (error) {
-	    console.error(error);
-      }
-    }, 
-        
+    methods:{        
     getUserInput(){
           const userWord = this.$refs.form.userInput.value;
           if(userWord === this.word){
@@ -72,6 +54,14 @@ import axios from 'axios';
             this.message = 'Wrong Answer!'
           }
         },
+
+    getWord(){
+        axios.get('https://random-word-api.herokuapp.com/word')
+         .then(response =>{
+         this.word = response.data;
+        })
+      }
+    },
 
         // randomWord(){
         //     let randomWord = Math.floor(Math.random() * this.words.length)
@@ -119,15 +109,12 @@ import axios from 'axios';
         this.seconds = 0;
         this.message = '';
         },
-    },
 
     mounted(){
-        this.word = this.getWord();
+      
+      this.word = this.getWord()
     }
-   }
-   
-   
-
+  }
 
 </script>
 
