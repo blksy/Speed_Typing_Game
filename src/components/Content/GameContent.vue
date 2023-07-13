@@ -1,8 +1,8 @@
 <template>
     <div class="btns__contain">
-       <button class="button__dif" @click="chooseDifficulty('easy', 9)">Easy</button>
-       <button class="button__dif" @click="chooseDifficulty('medium', 6)">Medium</button>
-       <button class="button__dif" @click="chooseDifficulty('hard', 3)">Hard</button>
+       <button class="button__dif" @click="chooseDifficulty(0, 0)">Easy</button>
+       <button class="button__dif" @click="chooseDifficulty(1, 1)">Medium</button>
+       <button class="button__dif" @click="chooseDifficulty(2, 2)">Hard</button>
     </div>
     <div class="content">
         <h3>Type the given word within <span class="seconds">{{seconds}}</span> seconds</h3>
@@ -55,11 +55,10 @@ import axios from 'axios';
     getWord(){
         axios.get('https://random-word-api.herokuapp.com/word')
          .then(response =>{
-         this.word = response.data;
+         this.word = response.data[0];
         })
-      }
-    },
-        
+      },
+            
     chooseDifficulty(name, time){
         this.seconds = this.difficulty.count[time];
         this.timeLeft();
@@ -101,6 +100,7 @@ import axios from 'axios';
         this.seconds = 0;
         this.message = '';
       },
+    },
 
     mounted(){
       
