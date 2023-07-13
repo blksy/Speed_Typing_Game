@@ -15,7 +15,7 @@
           <h4>Time Left: {{ time }}</h4>
           <h4>Score: {{score}}</h4>
         </div>
-      <button class="button" @click="reset">New Game</button>
+      <button class="button" @click="reset" :disabled="isGameOn">New Game</button>
     </div>  
 </template>
 
@@ -36,9 +36,6 @@ import axios from 'axios';
               diff:['easy', 'medium', 'hard'],
               count:[9, 6, 3]
             },
-            // words:[ 'calendar','appointment','crossover','comparison','tomorrow','comfortable','generate','stubborn','cocktail','accidentally','nonsense','jealous',
-            //  'impatient','maelstrom','appropriate','mountaintop','grateful','algorithm',"maintain","other","phenomenon","excellent","aberration","complement","different","exaggerate",
-            //  "recommend","development","direction","immediate","important","subjugate","public","accomplish","knowledge","conflagration","disability","arrangement","impostor","credibility"],
         }
     },
     methods:{        
@@ -62,53 +59,48 @@ import axios from 'axios';
         })
       }
     },
-
-        // randomWord(){
-        //     let randomWord = Math.floor(Math.random() * this.words.length)
-        //     return this.words[randomWord];
-        // },
         
-        chooseDifficulty(name, time){
-          this.seconds = this.difficulty.count[time];
-          this.timeLeft();
-          this.timeCountDown();
-          this.level = this.difficulty.diff[name];
-          this.$refs.form.userInput.focus();
-        },
+    chooseDifficulty(name, time){
+        this.seconds = this.difficulty.count[time];
+        this.timeLeft();
+        this.timeCountDown();
+        this.level = this.difficulty.diff[name];
+        this.$refs.form.userInput.focus();
+      },
 
-        timeCountDown(){
-            setInterval(() =>{
-            let remainingTime = this.time
-            if(remainingTime > 0){
-                this.time--
-            }else{
-                this.isGameOn = false
-                this.message = 'Game Over'
-                this.inputValue = ''
-            }}, 1200);
+    timeCountDown(){
+        setInterval(() =>{
+        let remainingTime = this.time
+        if(remainingTime > 0){
+          this.time--
+        }else{
+          this.isGameOn = false
+          this.message = 'Game Over'
+          this.inputValue = ''
+        }}, 1200);
         }, 
 
-        timeLeft(){
-            this.time = this.seconds;
-        },
+    timeLeft(){
+        this.time = this.seconds;
+      },
 
-        timeReset(){
-         if(this.level === 'easy'){
-            this.time = 9
-         }else if(this.level === 'medium'){
-            this.time = 6
-         }else if(this.level === 'hard'){
-            this.time = 3
-         }
-        },
+    timeReset(){
+        if(this.level === 'easy'){
+          this.time = 9
+        }else if(this.level === 'medium'){
+          this.time = 6
+        }else if(this.level === 'hard'){
+          this.time = 3
+        }
+      },
 
-        reset(){
+    reset(){
         this.isGameOn = true;
         this.time = 0;
         this.score = 0;
         this.seconds = 0;
         this.message = '';
-        },
+      },
 
     mounted(){
       
